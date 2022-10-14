@@ -10,11 +10,16 @@ let spreadsheetId = process.env.SPREAD_SHEER_ID;
 let getAllData = async (req, res) => {
     try {
         let data = await getClient();
-        let finalSet = {}
-        data.forEach(i => {
-            finalSet[i[0]] = i[1];
-        })
-        res.send(finalSet)
+        let finalSet = {};
+        if(data != undefined) {
+            data.forEach(i => {
+                finalSet[i[0]] = i[1];
+            })
+            res.send(finalSet)
+        } else {
+            res.send('No records found, Please enter the data')
+        }
+       
     } catch (error) {
         console.log("Error from the get method", error);
     }
